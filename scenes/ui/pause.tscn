@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://resources/ui/bit.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/ui/pause.gd" type="Script" id=2]
+[ext_resource path="res://resources/audio/sounds/press.mp3" type="AudioStream" id=3]
+[ext_resource path="res://resources/audio/sounds/focus.mp3" type="AudioStream" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_top = 8
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_bottom = 8
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+Button/styles/disabled = SubResource( 5 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 5 )
+Button/styles/pressed = SubResource( 6 )
+
+[node name="pause" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 4 )
+script = ExtResource( 2 )
+
+[node name="filled" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.901961 )
+
+[node name="tutorial" type="Label" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+text = "press wasd to move, press shift to slow move, f to open window on fullscreen mode."
+align = 1
+valign = 2
+autowrap = true
+
+[node name="container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="return" type="Button" parent="container"]
+margin_top = 272.0
+margin_right = 1400.0
+margin_bottom = 308.0
+text = "Return"
+flat = true
+
+[node name="lobby" type="Button" parent="container"]
+margin_top = 312.0
+margin_right = 1400.0
+margin_bottom = 348.0
+text = "Go to lobby"
+flat = true
+
+[node name="close" type="Button" parent="container"]
+margin_top = 352.0
+margin_right = 1400.0
+margin_bottom = 388.0
+text = "close the game"
+flat = true
+
+[node name="config" type="Button" parent="container"]
+margin_top = 392.0
+margin_right = 1400.0
+margin_bottom = 428.0
+text = "Config"
+flat = true
+
+[node name="config" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="filled" type="ColorRect" parent="config"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="container" type="VBoxContainer" parent="config"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="fullscreen" type="Button" parent="config/container"]
+margin_top = 312.0
+margin_right = 1400.0
+margin_bottom = 348.0
+text = "Fullscreen"
+flat = true
+
+[node name="back" type="Button" parent="config/container"]
+margin_top = 352.0
+margin_right = 1400.0
+margin_bottom = 388.0
+text = "Back"
+flat = true
+
+[node name="audio" type="Node" parent="."]
+
+[node name="press" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 3 )
+
+[node name="focus" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 4 )
+
+[connection signal="button_down" from="container/return" to="." method="_on_button_down"]
+[connection signal="button_down" from="container/return" to="." method="_on_return_button_down"]
+[connection signal="mouse_entered" from="container/return" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="container/lobby" to="." method="_on_button_down"]
+[connection signal="button_down" from="container/lobby" to="." method="_on_lobby_button_down"]
+[connection signal="mouse_entered" from="container/lobby" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="container/close" to="." method="_on_button_down"]
+[connection signal="button_down" from="container/close" to="." method="_on_close_button_down"]
+[connection signal="mouse_entered" from="container/close" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="container/config" to="." method="_on_button_down"]
+[connection signal="button_down" from="container/config" to="." method="_on_config_button_down"]
+[connection signal="mouse_entered" from="container/config" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="config/container/fullscreen" to="." method="_on_button_down"]
+[connection signal="button_down" from="config/container/fullscreen" to="." method="_on_fullscreen_button_down"]
+[connection signal="mouse_entered" from="config/container/fullscreen" to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="config/container/back" to="." method="_on_button_down"]
+[connection signal="button_down" from="config/container/back" to="." method="_on_back_button_down"]
+[connection signal="mouse_entered" from="config/container/back" to="." method="_on_mouse_entered"]

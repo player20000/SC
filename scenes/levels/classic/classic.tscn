@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/entity/spike/spike.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/entity/player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/levels/classic/classic.gd" type="Script" id=3]
+[ext_resource path="res://resources/textures/tile.png" type="Texture" id=4]
+[ext_resource path="res://scenes/entity/nps/nps.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/entity/elk/elk.tscn" type="PackedScene" id=6]
+[ext_resource path="res://resources/ui/bit.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 1, -1, 1 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 1, -1, 1 )
+uv1_triplanar = true
+
+[sub_resource type="DynamicFont" id=3]
+size = 256
+outline_size = 64
+font_data = ExtResource( 7 )
+
+[node name="classic" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="camera" type="InterpolatedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16 )
+fov = 60.0
+far = 512.0
+target = NodePath("../camposition")
+speed = 0.5
+enabled = true
+
+[node name="camposition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16 )
+
+[node name="combiner" type="CSGCombiner" parent="."]
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="surface" type="CSGBox" parent="combiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -32.5, 0 )
+width = 80.0
+height = 64.0
+depth = 8.0
+material = SubResource( 2 )
+
+[node name="surface2" type="CSGBox" parent="combiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72, -28, 0 )
+width = 64.0
+height = 72.0
+depth = 8.0
+material = SubResource( 1 )
+
+[node name="surface3" type="CSGBox" parent="combiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72, -28, 0 )
+width = 64.0
+height = 72.0
+depth = 8.0
+material = SubResource( 1 )
+
+[node name="surface4" type="CSGBox" parent="combiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1, -4.1, -19.4 )
+width = 16.0
+height = 48.0
+depth = 16.0
+material = SubResource( 1 )
+
+[node name="surface5" type="CSGBox" parent="combiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9, -4.1, -20.8 )
+width = 18.0
+height = 128.0
+depth = 18.0
+material = SubResource( 1 )
+
+[node name="surface6" type="CSGBox" parent="combiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18, 0 )
+width = 2048.0
+height = 1.0
+depth = 2048.0
+material = SubResource( 1 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38419e-07, 0 )
+
+[node name="spikes" type="Spatial" parent="."]
+
+[node name="spike" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.9, -0.2, 0 )
+
+[node name="spike2" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.6, -0.2, 0 )
+
+[node name="spike3" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3, -0.2, 0 )
+
+[node name="spike4" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -0.2, 0 )
+
+[node name="spike5" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -0.2, 0 )
+
+[node name="spike6" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3, -0.2, 0 )
+
+[node name="spike7" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6, -0.2, 0 )
+
+[node name="spike8" parent="spikes" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9, -0.2, 0 )
+
+[node name="labels" type="Spatial" parent="."]
+
+[node name="clock" type="Label3D" parent="labels"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -9 )
+pixel_size = 0.05
+alpha_cut = 1
+text = "30"
+font = SubResource( 3 )
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="sun" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3.5, 0 )
+light_energy = 2.0
+
+[node name="nps" type="Spatial" parent="."]
+
+[node name="nps" parent="nps" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.6, 0 )
+
+[node name="nps2" parent="nps" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.4, 32.8, 0 )
+
+[node name="nps3" parent="nps" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 131.4, 0 )
+
+[node name="elk" parent="nps" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39.3, -1.19209e-07, 0 )
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
